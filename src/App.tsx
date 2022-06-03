@@ -12,6 +12,7 @@ import LogoImg from "./assets/logo.png";
 import { Step1 } from "./pages/Step1";
 import { Step2 } from "./pages/Step2";
 import { Finish } from "./pages/Finish";
+import { Step3 } from "./pages/Step3";
 
 function App() {
   const [currentStep, setCurrentStep] = useState("start");
@@ -29,6 +30,10 @@ function App() {
     if (currentStep === "second") {
       setCurrentStep("third");
     }
+
+    if (currentStep === "third") {
+      setCurrentStep("end");
+    }
   };
 
   const handleOption = (option: string) => {
@@ -37,6 +42,15 @@ function App() {
 
   const handleFinishFeedback = () => {
     setCurrentStep("end");
+  };
+
+  const handleSendForm = (values) => {
+    try {
+      console.log(values);
+      setCurrentStep("end");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -63,7 +77,7 @@ function App() {
         />
       )}
 
-      {currentStep === "third" && <h1>hello world</h1>}
+      {currentStep === "third" && <Step3 handleSendForm={handleSendForm} />}
 
       {currentStep === "end" && <Finish />}
     </>
